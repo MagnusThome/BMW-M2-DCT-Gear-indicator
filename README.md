@@ -67,6 +67,9 @@ If you hook up directly to the CAN bus in the instrument cluster you must do thi
 
 3.
 Don't forget to set the DC-DC converter output to 5 volts!  
+  
+4.  
+Enable the 120Ohm load resistor on the MCP2515 board by having the jumper for this in place.  
     
   
 # Install libraries:
