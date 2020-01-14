@@ -1,6 +1,21 @@
 # BMW-M2-DCT-Gear-indicator
 OBD2 / CAN bus to display current gear in a BMW M2 with DCT
   
+![Display](images/a.jpg)  
+  
+![Display](images/b.jpg)  
+  
+![Display](images/c.jpg)  
+  
+![Display](images/d.jpg)  
+  
+![Display](images/e.jpg)  
+  
+![Display](images/f.jpg)  
+  
+![Display](images/g.jpg)  
+  
+  
 # Install libraries:
 
 - https://github.com/collin80/esp32_can
@@ -84,4 +99,8 @@ Make sure the display isn't scaling the incoming data, many can show 100kmh as 1
 2.
 Preferably you power the ESP32 and display with power that turns off when the car is off. But if you only have constant power you can make the DC-DC converter shutdown when the voltage drops under 13V which it does when the engine isn't running and is charging the car battery. Connect a zener diode from the incoming "12V" from the car to the DC-DC enable ("EN") pin with the zener cathode towards the incoming 12V and the anode towards the DC-DC board. Then connect a 10Kohm resistor between the enable pin and gorund. Double check that it actually does power off properly in your car. I doubt you'll need it but worst case you need a slightly higher or lower voltage on the zener, or a voltage divider with one extra resistor to adjust the control voltage to the enable pin. This trick will only power off the ESP32, make sure your OBD display auto shuts off too, they normally have some settings for that.
 
+3.
+Don't forget to set the DC-DC converter output to 5 volts!  
+  
+  
 
