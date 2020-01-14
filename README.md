@@ -50,7 +50,7 @@ DC-DC converter
 https://www.aliexpress.com/wholesale?SearchText=dc-dc+1.8V+2.5V+3.3V+5V+9V+12V   
 ![Display](images/dc-dc.png)  
   
-And a push switch to change between speed, current gear, water and oil temps  
+And a push switch to change between speed, current gear, water and oil temps. This _might_ get obsolete if I get around to switching display modes using one of the cars steering wheel buttons instead (long press on "res")  
   
 ![Display](images/b.jpg) 
   
