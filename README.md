@@ -1,5 +1,11 @@
 # BMW-M2-DCT-Gear-indicator
-OBD2 / CAN bus to display current gear in a BMW M2 with DCT
+OBD2 / CAN bus to display current gear in a BMW M2 with DCT  
+  
+The clear uncluttered display can show either current DCT gear, speed, water or oil temperatures. I use speed on public roads, current gear when driving back roads and temperatures when I'm on track. Thanks to the big digits and unclutered display I always see the number even when looking straight ahead and not at the display at all.
+
+![Display](images/night.jpg)  
+  
+![Display](images/day.jpg)  
   
 ![Display](images/a.jpg)  
   
