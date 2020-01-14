@@ -30,7 +30,7 @@ I place my computing unit behind the instrument cluster connecting it to the CAN
 
 # Parts:  
   
-MINI32 (other ESP32 variants work to of course)  
+MINI32 (other ESP32 variants work too of course)  
 https://www.aliexpress.com/w/wholesale-t7+esp32+mini.html  
 ![Display](images/mini32.png)
 
