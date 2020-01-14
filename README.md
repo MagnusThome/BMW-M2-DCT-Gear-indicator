@@ -45,6 +45,9 @@ https://www.aliexpress.com/wholesale?SearchText=dc-dc+1.8V+2.5V+3.3V+5V+9V+12V
 ![Display](images/dc-dc.png)  
   
 And a push switch to change between speed, current gear, water and oil temps  
+  
+![Display](images/b.jpg) 
+  
    
 # Tips:  
   
