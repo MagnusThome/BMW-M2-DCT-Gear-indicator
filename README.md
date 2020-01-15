@@ -44,7 +44,7 @@ https://www.aliexpress.com/w/wholesale-sn65hvd230.html
   
 OBD2 display (I choose this for its clean uncluttered display and large digits)  
 https://www.ebay.co.uk/itm/143478383828   
-![Display](images/obddisplay.jpg)
+![Display](images/obdhud.jpg)
   
 DC-DC converter  
 https://www.aliexpress.com/wholesale?SearchText=dc-dc+1.8V+2.5V+3.3V+5V+9V+12V   
