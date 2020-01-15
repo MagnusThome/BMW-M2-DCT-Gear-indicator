@@ -7,7 +7,9 @@ The basis is that the unit gets OBD2 data from the car, calculates what gear you
   
 Any OBD HUD display should theoretically work. You can also use other displays, LED 7 segment for example, with some simple tweaking of the code of course. I did some test units with a mirror and inverted LED 7 segment displays to simulate a built in HUD display but it was simply to bulky to place on top of the dashboard.  
   
-I place my computing unit behind the instrument cluster connecting it to the CAN bus inside the cluster (and picking up switched 12V for power there too) but the easiest way is of course simply connecting it to the car's OBD2 jack.
+I place my computing unit behind the instrument cluster connecting it to the CAN bus inside the cluster (and picking up switched 12V for power there too) but the easiest way is of course simply connecting it to the car's OBD2 jack.  
+  
+The total cost of parts excluding the OBD display itself is less than $10. The display I use is roughly an additional $20.
     
 ![Display](images/night.jpg)  
   
