@@ -106,7 +106,7 @@ GPIO18    SCK
 GPIO26    INT  
 5V        VCC  
 GND       GND  
-and the MCP2515's two CAN bus pins connected the CAN pins on an OBD2 HUD display	
+and the MCP2515's two CAN bus pins connected the OBD2 HUD display's CAN pins 	
 ```  
 
 ```  
