@@ -13,7 +13,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//#define DISPLAY_MPH
 //#define DEBUG
+
 #define DISPLAYMODES 4
 
 #define BUTTON_GPIO 32
@@ -32,6 +34,7 @@
 uint8_t displaymode = 0;
 int16_t display;
 uint8_t kmh = 0;
+uint8_t mph = 0;
 uint16_t rpm = 0;
 uint8_t rpmOBDH = 0;
 uint8_t rpmOBDL = 0;
@@ -148,9 +151,14 @@ void fromCar(CAN_FRAME *from_car) {
     else if (ratio>21) { gear = 6; } 
     else               { gear = 7; }  
   }
+  mph = (uint16_t) kmh*0.621371;
 
   if (displaymode>=DISPLAYMODES) { displaymode = 0; }     // WHAT DATA TO DISPLAY 
+#ifdef DISPLAY_MPH
+  if (displaymode == 0)      { display = mph; }
+#else
   if (displaymode == 0)      { display = kmh; }
+#endif                                                
   else if (displaymode == 1) { display = gear; }
   else if (displaymode == 2) { display = h2o-40; }
   else if (displaymode == 3) { display = oil-40; }
@@ -260,6 +268,8 @@ void printData(void) {
   Serial.print(displaymode);
   Serial.print("   \tkmh ");
   Serial.print(kmh);
+  Serial.print("   \tmph ");
+  Serial.print(mph);
   Serial.print("   \trpm ");
   Serial.print(rpm);
   Serial.print("   \tratio ");
