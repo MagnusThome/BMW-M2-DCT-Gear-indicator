@@ -5,7 +5,7 @@ The basis is that this kit gets OBD2 data from the car, calculates what gear you
   
 I actually only use it to display speed when daily driving, but set it to show current gear when driving back roads and temperatures when I'm on track. Thanks to the big digits and uncluttered display I always see the number even when looking straight ahead and not at the display at all. 
   
-Any OBD HUD display should theoretically work. You can also use other displays, LED 7 segment for example, with some simple tweaking of the code of course. I did some test units with a mirror and inverted LED 7 segment displays to simulate a built in HUD display but it was simply to bulky to place on top of the dashboard.  
+Any OBD HUD display should theoretically work. You can also use other displays, regular LED 7-segment displays for example, with some simple tweaking of the code of course. I did some test units with a mirror and inverted LED 7 segment displays to simulate a built in HUD display but it was simply to bulky to place on top of the dashboard.  
   
 I place these boards behind the instrument cluster connecting it to the CAN bus inside the cluster (and picking up switched 12V for power there too) but the easiest way is of course simply connecting it to the car's OBD2 jack.  
   
