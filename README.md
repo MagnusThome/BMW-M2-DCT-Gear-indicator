@@ -69,16 +69,21 @@ Make sure the display isn't scaling the incoming data, many can show 100kmh as 1
 To show mph instead of kmh enable this with the define in the source code. Then set the OBD HUD display __to show kmh__. 
   
 3.
-Preferably you power the ESP32 and the display with power that turns off when the car is off. But if you only have constant power you can make the DC-DC converter shutdown when the voltage drops under 13V which it does when the engine isn't running and is charging the car battery. Connect a zener diode from the incoming "12V" from the car to the DC-DC enable ("EN") pin with the zener cathode towards the incoming 12V and the anode towards the DC-DC board. Then connect a 10Kohm resistor between the enable pin and ground. Double check that it actually does power off properly in your car. I doubt you'll need it but worst case you need a slightly higher or lower voltage on the zener, or a voltage divider with one extra resistor to adjust the control voltage to the enable pin. This trick will only power off the ESP32, make sure your OBD display auto shuts off too, they normally have some settings for that.  
-  
-If you hook up directly to the CAN bus in the instrument cluster you must do this zener shutdown trick since the processor sends out CAN requests for speed, temperatures and so on as long as it is powered on and this keeps the instrument cluster alive.    
-
-4.
 Don't forget to set the DC-DC converter output to 5 volts!  
   
-5.  
-Enable the 120Ohm load resistor on the MCP2515 board by having the jumper for this in place.  
-    
+4.  
+Enable the 120 Ohm load resistor on the MCP2515 board by having the jumper for this put in place.  
+  
+5.
+Preferably you power the ESP32 and the display with power that turns off when the car is off. But if you only have constant power you can make the DC-DC converter shutdown when the voltage drops under 13V which it does when the engine isn't running and is charging the car battery.  
+  
+For this to work you can connect a _12 volt zener diode_ between where you connect the incoming power "twelve volts" from the car to the DC-DC converter and the DC-DC converter enable ("EN") pin with the zener cathode towards the incoming voltage and the anode towards the "EN" pin. Then connect a 100Kohm resistor between the "EN" pin and ground. If your supplied voltage isn't 100% clean and stable you might need to connect a 10uF capacitor in parallell to the resistor to prevent short spikes of voltage drops to shut down the DC-DC converter.  
+  
+Double check that it actually does power off properly in your car. I doubt you'll need it but worst case you need a slightly higher or lower voltage on the zener, or a voltage divider with one extra resistor to adjust the control voltage to the enable pin. This trick will only power off the ESP32, make sure your OBD display auto shuts off too, they normally have some settings for that.  
+  
+If you hook up directly to the CAN bus in the instrument cluster you must do this zener shutdown trick since the processor sends out CAN requests for speed, temperatures and so on as long as it is powered on and this keeps the instrument cluster alive.    
+  
+  
   
 # Install libraries:
 
