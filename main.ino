@@ -13,16 +13,30 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include "soc/soc.h"              // Disable brownout
+#include "soc/rtc_cntl_reg.h"     // Disable brownout
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SOME USER SETTINGS:
+
+#define CAR_CHARGING_TRIP_VOLTAGE 1900  // SET SO:
+                                        // ABOVE THIS VALUE EQUALS VOLTAGE WHEN ENGINE IS RUNNING (CHARGING) 
+                                        // BELOW THIS VALUE EQUALS VOLTAGE WHEN ENGINE IS OFF (NOT CHARGING)
 //#define DISPLAY_MPH
 //#define DEBUG
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 #define DISPLAYMODES 4
 
 #define BUTTON_GPIO 32
-#define CAN0_RX_GPIO GPIO_NUM_16 
-#define CAN0_TX_GPIO GPIO_NUM_17
+#define VOLTAGE_SENSE_GPIO 12
 #define CAN1_CS_GPIO  5
 #define CAN1_INT_GPIO 26
+#define CAN0_RX_GPIO GPIO_NUM_16 
+#define CAN0_TX_GPIO GPIO_NUM_17
 
 #define ENGINE_RPM                  0x0C
 #define VEHICLE_SPEED               0x0D
@@ -48,6 +62,7 @@ uint16_t ratio;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void setup() {
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); // Disable brownout
 	Serial.begin(115200);
   Serial.println("Booting Rejsa.nu OBD2 Gear translator...");
   pinMode(BUTTON_GPIO, INPUT_PULLUP);
@@ -60,15 +75,19 @@ void setup() {
 
 void loop() {
 
-  requestCar();                     // REQUEST DATA FROM CAR
-                                    // REPLIES ARE HANDLED BY CALLBACK. DATA PUT IN GLOBAL VARS
+#ifdef DEBUG
+  Serial.println(analogRead(VOLTAGE_SENSE_GPIO));
+#endif
+  if (analogRead(VOLTAGE_SENSE_GPIO) > CAR_CHARGING_TRIP_VOLTAGE) {
+    requestCar();                   // REQUEST DATA FROM THE CAR IF THE ENGINE IS RUNNING (CHARGING THE BATTERY = HIGHER VOLTAGE)
+  }                                 // REPLIES ARE HANDLED BY CALLBACK. DATA PUT IN GLOBAL VARS
                                     
   handleOBDDisplay();               // SEND DATA TO OBD2 DISPLAY 
   printData();                      // PRINT DATA ON SERIAL USB
 
   checkButton();                    // CHECK FOR BUTTON PRESS TO CHANGE DISPLAYMODE
 
-  delay(100);                       // MAIN LOOP DELAY FOR REQUESTING DATA FROM THE CAR AND SENDING DATA ON TO THE DISPLAY -- BUT ALSO DEBOUNCE FOR THE BUTTON.
+  delay(100);                       // MAIN LOOP DELAY FOR SENDING DATA REQUESTS TO THE CAR AND REPLYING TO DATA REQUESTS FROM THE DISPLAY -- BUT ALSO DEBOUNCE FOR THE BUTTON.
 }
 
 
@@ -117,7 +136,7 @@ void requestCar(void) {
   outgoing.data.uint8[7] = 0x00;  
 
   CAN0.sendFrame(outgoing);
-  printFrame(outgoing, 1);
+  printFrame(outgoing,0);
   req_cntr++;
   if (req_cntr>=100) { req_cntr = 0; }
 }
@@ -137,7 +156,7 @@ void fromCar(CAN_FRAME *from_car) {
   else if (from_car->data.uint8[2]==VEHICLE_SPEED)              { kmh = from_car->data.uint8[3]; }
   else if (from_car->data.uint8[2]==ENGINE_COOLANT_TEMPERATURE) { h2o = from_car->data.uint8[3]; }  
   else if (from_car->data.uint8[2]==ENGINE_OIL_TEMPERATURE)     { oil = from_car->data.uint8[3]; }  
-  printFrame(*from_car, 0);
+  printFrame(*from_car, 1);
                                                           // REPACKAGE SOME OF THE DATA
   rpm = (uint16_t) ((256*rpmOBDH) + rpmOBDL)/(float)4;
   if (kmh<1)           { gear = 0; } 
@@ -291,7 +310,7 @@ void printData(void) {
 void printFrame(CAN_FRAME &frame, uint8_t msg) {
 
 #ifdef DEBUG
-  String info[] = {"< DISPL           ", "           > DISPL", "< CAR             ", "           > CAR  "};
+  String info[] = {"           > CAR  ", "< CAR             ", "< DISPL           ", "           > DISPL"};
   Serial.print(info[msg]);
   Serial.print("\t");
   Serial.print(frame.id,HEX);
