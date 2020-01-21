@@ -108,7 +108,7 @@ In library\esp32_can\src\esp32_can.h
 
 ``` 
 ESP32     MCP2515  
-  
+-----     -------  
 GPIO5     CS  
 GPIO23    SI  
 GPIO19    SO      (don't connect GPIO19 and SO directly together but via a 1 KOhm resistor)  
@@ -121,7 +121,7 @@ and the MCP2515's two CAN bus pins connected the OBD2 HUD display's CAN pins
 
 ```  
 ESP32     SN65HVD230
-  
+-----     ----------  
 GPIO16    CRX  
 GPIO17    CTX  
 3V3       3V3  
@@ -131,14 +131,14 @@ and the SN65HVD230's two CAN bus pins connected to the cars OBD2 CAN pins
   
 ```  
 ESP32     PUSH SWITCH
-  
+-----     -----------  
 GPIO32    a  
 GND       b  
 ```  
   
 ```  
-ESP32     INCOMING VOLTAGE SENSE
-  
+ESP32     INCOMING 12V SENSE
+-----     ------------------  
 GPIO12    10 Kohm between GPIO12 and incoming 12V
           1 Kohm beween GPIO12 and GND
 GND         
