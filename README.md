@@ -106,7 +106,7 @@ ESP32     MCP2515
   
 GPIO5     CS  
 GPIO23    SI  
-GPIO19    SO  
+GPIO19    SO      (preferably don't connect GPIO19 and SO directly together but via a 1KOhm resistor)  
 GPIO18    SCK  
 GPIO26    INT  
 5V        VCC  
