@@ -13,8 +13,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "soc/soc.h"              // Disable brownout
-#include "soc/rtc_cntl_reg.h"     // Disable brownout
+//#include "soc/soc.h"              // Disable brownout
+//#include "soc/rtc_cntl_reg.h"     // Disable brownout
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ uint16_t ratio;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void setup() {
-  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); // Disable brownout
+//WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); // Disable brownout
 	Serial.begin(115200);
   Serial.println("Booting Rejsa.nu OBD2 Gear translator...");
   pinMode(BUTTON_GPIO, INPUT_PULLUP);
