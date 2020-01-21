@@ -111,7 +111,7 @@ ESP32     MCP2515
   
 GPIO5     CS  
 GPIO23    SI  
-GPIO19    SO      (preferably don't connect GPIO19 and SO directly together but via a 1KOhm resistor)  
+GPIO19    SO      (don't connect GPIO19 and SO directly together but via a 1 KOhm resistor)  
 GPIO18    SCK  
 GPIO26    INT  
 5V        VCC  
@@ -135,4 +135,11 @@ ESP32     PUSH SWITCH
 GPIO32    a  
 GND       b  
 ```  
-
+  
+```  
+ESP32     INCOMING VOLTAGE SENSE
+  
+GPIO12    10 Kohm between GPIO12 and incoming 12V
+          1 Kohm beween GPIO12 and GND
+GND         
+```  
