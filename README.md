@@ -75,7 +75,7 @@ Don't forget to set the DC-DC converter output to 5 volts!
 Enable the 120 Ohm load resistor on the MCP2515 board by having the jumper for this put in place.  
   
 5.
-Preferably you power the ESP32 and the display with power that turns off when the car is off. But if you only have constant power you can make the DC-DC converter shutdown when the voltage drops under 13V which it does when the engine isn't running and is charging the car battery.  
+Preferably you power the ESP32 and the display with power that turns off when the car is off. But if you only have constant power you can make the DC-DC converter shutdown when the voltage drops under 13V which it does when the engine isn't running and the battery isn't charging anymore.  
   
 For this to work you can connect a _12 volt zener diode_ between where you connect the incoming power "twelve volts" from the car to the DC-DC converter and the DC-DC converter enable ("EN") pin with the zener cathode towards the incoming voltage and the anode towards the "EN" pin. Then connect a _10 Kohm resistor_ between the "EN" pin and ground. If your supplied voltage isn't 100% clean and stable you might need to connect a _10uF capacitor_ in parallell to the resistor to prevent short spikes of voltage drops to shut down the DC-DC converter.  
   
