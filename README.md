@@ -139,10 +139,12 @@ GND
   
 Preferably you power the ESP32 and the display with power that turns off when the car is off. But if you only have access to constant power you can make the DC-DC converter shutdown when the voltage from the car drops under 13V which it does when the engine isn't running and the battery isn't charging anymore.  
   
-Using an 11 volt zener diode plus two resistors you can make the DC-DC converter shutdown the power to the ESP32 when the car isn't charging the car battery. You connect the three components as below to the DC-DC _enable_ pin ("EN"). Note that this will not shutdown the display you are using, only the ESP32, since the display takes its power directly from the car and not via the DC-DC converter. But most HUD displays have a built in shutdown.  
+Using an 11 volt zener diode plus two resistors you can make the DC-DC converter shutdown the power to the ESP32 when the car isn't charging the car battery. You connect the three components as below to the DC-DC _enable_ pin ("EN"). 
   
 Double check that the ESP32 actually does power off properly in your car. If it tends to not turn __off__ you can increase the value of the 4K7 resistor. And vice versa, if it tends to not turn __on__ you can decrease the value of the 4K7 resistor.
   
+Note that this will not shutdown the display you are using, only the ESP32, since the display takes its power directly from the car and not via the DC-DC converter. But most HUD displays have a built in shutdown. The HUD in the parts list above even has a menu where you can choose at what voltage it should start and shut down.  
+
 ![Display](images/enable-dc-dc.gif)  
   
 # Stop requesting data from the car
