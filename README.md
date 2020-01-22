@@ -3,7 +3,7 @@ OBD2 / CAN bus to display current gear in a BMW M2 with DCT
   
 The basis is that this kit gets OBD2 data from the car, calculates what gear you're in by matching rpm and speed and then sends this on as fake OBD "speed" data to any OBD head up display (HUD). So when you're in third gear the board sends "speed" as "3" to the display, which is set to show speed. So it shows "3". Same thing with oil and water temperatures, they're all sent as "speed".  
   
-I actually only use it to display speed when daily driving, but set it to show current gear when driving back roads and temperatures when I'm on track. Thanks to the big digits and uncluttered display I always see the number even when looking straight ahead and not at the display at all. 
+I actually only use this to display speed when daily driving, but set it to show current gear when driving back roads and temperatures when I'm on track. Thanks to the big digits and uncluttered display I always see the number even when looking straight ahead and not at the display at all. 
   
 Any OBD HUD display should theoretically work. You can also use other displays, regular LED 7-segment displays for example, with some simple tweaking of the code of course. I did some test units with a mirror and also inverted LED 7-segment displays to simulate a built in HUD display but it was simply to bulky to place on top of the dashboard.  
   
