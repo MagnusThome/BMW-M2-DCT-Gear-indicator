@@ -74,16 +74,6 @@ Don't forget to set the DC-DC converter output to 5 volts!
 4.  
 Enable the 120 Ohm load resistor on the MCP2515 board by having the jumper for this put in place.  
   
-5.
-Preferably you power the ESP32 and the display with power that turns off when the car is off. But if you only have constant power you can make the DC-DC converter shutdown when the voltage drops under 13V which it does when the engine isn't running and the battery isn't charging anymore.  
-  
-For this to work you can connect a _12 volt zener diode_ between where you connect the incoming power "twelve volts" from the car to the DC-DC converter and the DC-DC converter enable ("EN") pin with the zener cathode towards the incoming voltage and the anode towards the "EN" pin. Then connect a _10 Kohm resistor_ between the "EN" pin and ground. If your supplied voltage isn't 100% clean and stable you might need to connect a _10uF capacitor_ in parallell to the resistor to prevent short spikes of voltage drops to shut down the DC-DC converter.  
-  
-Double check that it actually does power off properly in your car. I doubt you'll need it but worst case you need a slightly higher or lower voltage on the zener, or a voltage divider with one extra resistor to adjust the control voltage to the enable pin. This trick will only power off the ESP32, make sure your OBD display auto shuts off too, they normally have some settings for that.  
-  
-If you hook up directly to the CAN bus in the instrument cluster you must do this zener shutdown trick since the processor sends out CAN requests for speed, temperatures and so on as long as it is powered on and this keeps the instrument cluster alive.    
-  
-  
   
 # Install libraries:
 
@@ -143,3 +133,16 @@ GPIO12    10 Kohm between GPIO12 and incoming 12V
           1 Kohm beween GPIO12 and GND
 GND         
 ```  
+  
+  
+# Auto Shutdown  
+  
+Preferably you power the ESP32 and the display with power that turns off when the car is off. But if you only have constant power you can make the DC-DC converter shutdown when the voltage from the car drops under 13V which it does when the engine isn't running and the battery isn't charging anymore.  
+  
+Using an 11 volt zener diode plus two resistors you can make the DC-DC converter shutdown the power to the ESP32 when the car isn't charging the car battery. You connect the three components as below to the DC-DC _enable_ pin ("EN"). Note that this will not shutdown the display you are using, only the ESP32, since the display takes its power directly from the car and not via the DC-DC converter. But most HUD displays have a built in shutdown.  
+  
+Double check that the ESP32 actually does power off properly in your car. If it tends to not turn __off__ you can increase the value of the 4K7 resistor. And vice versa, if it tends to not turn __on__ you can decrease the value of the 4K7 resistor.
+  
+![Display](images/enable-dc-dc.gif)
+
+  
