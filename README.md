@@ -155,6 +155,6 @@ To stop requesting data from the car over OBD2/CAN, which can keep things like t
   
 # Bridge  
   
-The file _bridge.ino_ contains some simple example code of a transparent bridge between two CAN bus subnets using the hardware's two CAN bus ports. All CAN bus data traffic is forwarded in both directions and is also printed over the serial USB. Use this file as a starting point if you want to create data packet filtering, data translations, packet injections or whatever :-)  
+The file _bridge.ino_ contains some simple example code of a transparent bridge between two CAN bus subnets using the hardware's two CAN bus ports. All CAN bus data traffic is forwarded in both directions and is also printed over the serial USB. Use this file as a starting point if you want to create data packet filtering, data translations, packet injections or whatever. Please note that I haven't tested what the maximum bandwith of data traffic the ESP32 can handle buit it's pretty capable little chip.
   
   
