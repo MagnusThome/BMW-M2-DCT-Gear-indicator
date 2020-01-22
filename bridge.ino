@@ -1,3 +1,11 @@
+/*
+
+This is just a simple bridge example where all traffic is forwarded in both directions between the two CAN bus subnets.
+You can watch all packets or add code to create filters, data translations o whatever...
+
+*/
+
+
 #include "esp32_can.h"            // https://github.com/collin80/esp32_can AND https://github.com/collin80/can_common
 /*              
         NOTE: YOU MUST ACTIVATE MCP2515 AND DEACTIVATE MCP2517 IN TWO FILES IN THE ABOVE LIBRARY LIKE THIS:
@@ -10,15 +18,6 @@
             //extern MCP2517FD CAN1;
             extern MCP2515 CAN1;
 */
-
-
-
-
-//      This is just a simple bridge example where all traffic is forwarded in both directions between the two CAN bus subnets.
-//      You can watch all packets or add code to create filters, data translations o whatever...
-
-
-
 
 
 #define CAN1_CS_GPIO  5
