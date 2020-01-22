@@ -66,7 +66,7 @@ And a push switch to change between speed, current gear, water and oil temps. Th
 Make sure the display isn't scaling the incoming data, many can show 100kmh as 102, 102 and so on by a scaling setting in their settings menu. Just set 100 to show 100. Otherwise it'll not show the correct gear.
 
 2.  
-To show mph instead of kmh enable this with the define in the source code. Then set the OBD HUD display __to show kmh__. 
+To show mph instead of kmh enable this with the define in the source code. Then set the OBD HUD __to display kmh__. 
   
 3.
 Don't forget to set the DC-DC converter output to 5 volts!  
@@ -149,7 +149,7 @@ Note that this will not shutdown the display you are using, only the ESP32, sinc
   
 # Stop requesting data from the car
   
-To stop requesting data from the car over OBD2/CAN, which can keep things like the instrument cluster alive if you connect to the CAN bus there, the ESP32 also watches the power voltage coming from the car using an analog input and two resistors. When the voltage drops below a certain level the code stops sending OBD2/CAN requests. The threshold value in the code is as default set to 1900, which equals to roughly 12,5 volts.
+To stop requesting data from the car over OBD2/CAN, which can keep things like the instrument cluster alive if you connect to the CAN bus there, the ESP32 also watches the power voltage coming from the car using an analog input and two resistors. When the voltage drops below a certain level the software stops sending OBD2/CAN requests. The threshold value in the code is as default set to 1900, which equals to roughly 12,5 volts.
   
 ![Display](images/carvoltages.gif)  
   
