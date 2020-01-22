@@ -11,23 +11,21 @@
             extern MCP2515 CAN1;
 */
 
+
+//#define DISPLAY_MPH
+//#define DEBUG
+//#define DISABLE_BROWNOUT_DETECTION
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//#include "soc/soc.h"              // Disable brownout
-//#include "soc/rtc_cntl_reg.h"     // Disable brownout
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SOME USER SETTINGS:
 
 #define CAR_CHARGING_TRIP_VOLTAGE 1900  // SET SO:
                                         // ABOVE THIS VALUE EQUALS VOLTAGE WHEN ENGINE IS RUNNING (CHARGING) 
                                         // BELOW THIS VALUE EQUALS VOLTAGE WHEN ENGINE IS OFF (NOT CHARGING)
-//#define DISPLAY_MPH
-//#define DEBUG
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+#ifdef DISABLE_BROWNOUT_DETECTION
+  #include "soc/soc.h"              // Disable brownout
+  #include "soc/rtc_cntl_reg.h"     // Disable brownout
+#endif
 
 #define DISPLAYMODES 4
 
@@ -62,11 +60,16 @@ uint16_t ratio;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void setup() {
-//WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); // Disable brownout
+
+#ifdef DISABLE_BROWNOUT_DETECTION
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); // Disable brownout
+#endif
+
 	Serial.begin(115200);
   Serial.println("Booting Rejsa.nu OBD2 Gear translator...");
   pinMode(BUTTON_GPIO, INPUT_PULLUP);
   startCAN();
+
 }
 
 
@@ -75,9 +78,6 @@ void setup() {
 
 void loop() {
 
-#ifdef DEBUG
-  Serial.println(analogRead(VOLTAGE_SENSE_GPIO));
-#endif
   if (analogRead(VOLTAGE_SENSE_GPIO) > CAR_CHARGING_TRIP_VOLTAGE) {
     requestCar();                   // REQUEST DATA FROM THE CAR IF THE ENGINE IS RUNNING (CHARGING THE BATTERY = HIGHER VOLTAGE)
   }                                 // REPLIES ARE HANDLED BY CALLBACK. DATA PUT IN GLOBAL VARS
