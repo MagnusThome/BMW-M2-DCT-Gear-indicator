@@ -143,6 +143,10 @@ Using an 11 volt zener diode plus two resistors you can make the DC-DC converter
   
 Double check that the ESP32 actually does power off properly in your car. If it tends to not turn __off__ you can increase the value of the 4K7 resistor. And vice versa, if it tends to not turn __on__ you can decrease the value of the 4K7 resistor.
   
-![Display](images/enable-dc-dc.gif)
-
+![Display](images/enable-dc-dc.gif)  
   
+# Stop requesting data from the car
+  
+To stop requesting data from the car over OBD2/CAN, which can keep things like the instrument cluster alive if you connect to the CAN bus there, the ESP32 also watches the power voltage coming from the car using an analog input and two resistors. When the voltage drops below a certain level the code stops sending OBD2/CAN requests. The threshold value in the code is as default set to 1900, which equals roughly 12,5 volts.
+  
+![Display](images/carvoltages.gif)  
