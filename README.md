@@ -152,3 +152,9 @@ Note that this will not shutdown the display you are using, only the ESP32, sinc
 To stop requesting data from the car over OBD2/CAN, which can keep things like the instrument cluster alive if you connect to the CAN bus there, the ESP32 also watches the power voltage coming from the car using an analog input and two resistors. When the voltage drops below a certain level the code stops sending OBD2/CAN requests. The threshold value in the code is as default set to 1900, which equals to roughly 12,5 volts.
   
 ![Display](images/carvoltages.gif)  
+  
+# Bridge  
+  
+The file _bridge.ino_ contains some simple example code of a transparent bridge between two CAN bus subnets using the hardware's two CAN bus ports. All CAN bus data traffic is forwarded in both directions and is also printed over the serial USB. Use this file as a starting point if you want to create data packet filtering, data translations, packet injections or whatever :-)  
+  
+  
