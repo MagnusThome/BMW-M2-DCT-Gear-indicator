@@ -85,7 +85,7 @@ NOTE: YOU MUST ACTIVATE MCP2515 AND DEACTIVATE MCP2517 IN TWO FILES IN THE ABOVE
 In library\esp32_can\src\esp32_can.cpp  
 ``` 
     //MCP2517FD CAN1(5, 27);   
-    MCP2515 CAN1(5, 27);  
+    MCP2515 CAN1(5, 26);  
 ``` 
       
 In library\esp32_can\src\esp32_can.h  
